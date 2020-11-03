@@ -1,0 +1,30 @@
+.Search {
+  text-align: center;
+}
+
+.Search-header {
+  background-color: #6f42c1;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.Search-list {
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+}
+
+.Search-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  border-radius: 8px;
+  background: #ffffff;
+  color: black;
+  border: 1px solid #312d3c;
+}
