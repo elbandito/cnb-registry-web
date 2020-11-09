@@ -1,0 +1,20 @@
+@import "../colors.scss";
+
+header {
+    background-color: $blue;
+    background-blend-mode: multiply;
+    border-bottom: 3px solid $pink;
+    padding: 10px;
+
+    .logo {
+        img {
+            height: 30px;            
+        }
+
+        span {
+            vertical-align: sub;
+            padding-left: 10px;
+            font-size: 1.6em;
+        }
+    }
+}
