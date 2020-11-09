@@ -1,14 +1,14 @@
 @import "../colors.scss";
 
-header {
-    background-color: $blue;
+.Header {
+    background-color: white;
     background-blend-mode: multiply;
-    border-bottom: 3px solid $pink;
-    padding: 10px;
+    border-bottom: 4px solid $pink;
 
-    .logo {
+    .navbar-brand {
         img {
-            height: 30px;            
+            height: 40px;
+            filter: drop-shadow(1px 2px 2px #0004);
         }
 
         span {

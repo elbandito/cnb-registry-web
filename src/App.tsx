@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import Search from "./Search";
 import Header from "./common/Header";
+import Search from "./search/Search";
 
 function App() {
     return (
