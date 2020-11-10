@@ -1,9 +1,11 @@
-import React from 'react';
 import './Search.scss';
+
+import React from 'react';
 import Axios, { AxiosResponse } from 'axios';
 import Loader from "react-spinners/RotateLoader";
-import { Button, Container, FormControl, InputGroup } from 'react-bootstrap';
+import { Container, FormControl, InputGroup } from 'react-bootstrap';
 import { Item as BuildpackItem } from '../buildpack/Item';
+import { Pagination } from './Pagination';
 
 function SearchList(props: any) {
     let i = 0;
@@ -49,6 +51,7 @@ class Search extends React.Component<{}, { searchResults: any[], loading: boolea
                     loading={this.state.loading}
                 />
                 <Container>
+                    <Pagination totalCount={100} limit={10} startIndex={10} />
                     <SearchList searchItems={this.state.searchResults} />
                 </Container>
             </div>
