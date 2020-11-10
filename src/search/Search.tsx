@@ -1,26 +1,16 @@
 import React from 'react';
-import './Search.css';
-import Axios, {AxiosResponse} from 'axios';
+import './Search.scss';
+import Axios, { AxiosResponse } from 'axios';
 import Loader from "react-spinners/RotateLoader";
-
-function SearchItem(props: any) {
-    return (
-        <div key={props.item.key} className="Search-item" onClick={() => {}} >
-            <div>
-                <b>{props.item.ns}/{props.item.name}</b>
-            </div>
-            <div>v{props.item.version}</div>
-            <div>{props.item.addr}</div>
-            <div>{props.item.yanked ? 'yanked' : ''}</div>
-        </div>
-    );
-}
+import { Button, Container, FormControl, InputGroup } from 'react-bootstrap';
+import { Item as BuildpackItem } from '../buildpack/Item';
 
 function SearchList(props: any) {
     let i = 0;
     const items = props.searchItems.map((item: any) => {
-        const newItem = {...item, ...{key: i++}};
-        return <SearchItem item={newItem} key={i}/>
+        const newItem = { ...item, ...{ key: i++ } };
+
+        return <BuildpackItem buildpack={newItem} key={i} />
     });
     return (
         <div className="Search-list">
@@ -42,23 +32,31 @@ class Search extends React.Component<{}, { searchResults: any[], loading: boolea
     render() {
         return (
             <div className="Search">
-                <header className="Search-header">
-                    <div>
-                        <input type="text" placeholder="Search Buildpacks..." onKeyDown={this.keyPressed} />
-                    </div>
-                </header>
+                <div className="Search-header">
+                    <Container className="py-3">
+                        <InputGroup onKeyDown={this.keyPressed}>
+                            <FormControl
+                                placeholder="Search buildpacks"
+                                aria-label="Search buildpacks"
+                                size="lg"
+                            />
+                        </InputGroup>
+                    </Container>
+                </div>
                 <Loader
                     size={80}
                     color={"#2c444e"}
                     loading={this.state.loading}
                 />
-                <SearchList searchItems={this.state.searchResults} />
+                <Container>
+                    <SearchList searchItems={this.state.searchResults} />
+                </Container>
             </div>
         );
     }
 
     async keyPressed(e: any) {
-        if (e.keyCode === 13){
+        if (e.keyCode === 13) {
             this.setState({
                 searchResults: [],
                 loading: e.target.value !== ''
