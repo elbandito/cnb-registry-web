@@ -15,12 +15,12 @@ function calcNumberOfPages(props: PaginationProps): number {
     return props.limit === 0 ? 1 : Math.ceil(props.totalCount / props.limit)
 }
 
+const PAGE_HIDE = 0
+const PAGE_ELLIPSIS = -1
+
 export const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
     let numbOfPages = calcNumberOfPages(props)
     let currentPage = calcCurrentPage(props)
-
-    const PAGE_HIDE = 0
-    const PAGE_ELLIPSIS = -1
 
     let pages = Array.from({ length: numbOfPages }, (_, i) => i + 1)
         .map(i => {
@@ -39,11 +39,11 @@ export const Pagination: React.FC<PaginationProps> = (props: PaginationProps) =>
             }
         })
         .filter(i => i !== PAGE_HIDE)
-        .map(i => {
+        .map((i, k) => {
             if (i === PAGE_ELLIPSIS) {
-                return (<Button className="rounded mr-2" disabled={true} variant="light">...</Button>)
+                return (<Button key={k} className="rounded mr-2" disabled={true} variant="light">...</Button>)
             } else {
-                return (<Button className="rounded mr-2" variant="outline-secondary" active={currentPage === i}>{i}</Button>)
+                return (<Button key={k} className="rounded mr-2" variant="outline-secondary" active={currentPage === i}>{i}</Button>)
             }
         })
 

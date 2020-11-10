@@ -6,6 +6,7 @@ import Loader from "react-spinners/RotateLoader";
 import { Container, FormControl, InputGroup } from 'react-bootstrap';
 import { Item as BuildpackItem } from '../buildpack/Item';
 import { Pagination } from './Pagination';
+import { Summary } from './Summary';
 
 function SearchList(props: any) {
     let i = 0;
@@ -21,11 +22,12 @@ function SearchList(props: any) {
     );
 }
 
-class Search extends React.Component<{}, { searchResults: any[], loading: boolean }> {
+class Search extends React.Component<{}, { searchTerm: string, searchResults: any[], loading: boolean }> {
     constructor(props: any) {
         super(props);
         this.keyPressed = this.keyPressed.bind(this);
         this.state = {
+            searchTerm: "",
             searchResults: [],
             loading: false
         }
@@ -51,7 +53,12 @@ class Search extends React.Component<{}, { searchResults: any[], loading: boolea
                     loading={this.state.loading}
                 />
                 <Container>
-                    <Pagination totalCount={100} limit={10} startIndex={10} />
+                    <div className="d-flex my-4 px-3">
+                        <Summary totalCount={100} searchTerm={this.state.searchTerm} />
+                        <div className="ml-auto">
+                            <Pagination totalCount={100} limit={10} startIndex={10} />
+                        </div>
+                    </div>
                     <SearchList searchItems={this.state.searchResults} />
                 </Container>
             </div>
@@ -61,6 +68,7 @@ class Search extends React.Component<{}, { searchResults: any[], loading: boolea
     async keyPressed(e: any) {
         if (e.keyCode === 13) {
             this.setState({
+                searchTerm: e.target.value,
                 searchResults: [],
                 loading: e.target.value !== ''
             });
